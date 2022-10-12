@@ -11,30 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     if: (github.event.issue.user.id == github.event.comment.user.id) && !github.event.issue.pull_request && (github.event.issue.state == 'open')
     steps:
-      - name: Add require handle label
-        uses: actions-cool/issues-helper@v2
-        with:
-          actions: 'add-labels'
-          labels: 'comment/pending handle'
-
       - name: Remove require reply label
         uses: actions-cool/issues-helper@v2
         with:
           actions: 'remove-labels'
           labels: 'comment/pending feedback'
 
+      - name: Add require handle label
+        uses: actions-cool/issues-helper@v2
+        with:
+          actions: 'add-labels'
+          labels: 'comment/pending handle'
+
   add-label-if-not-author:
     runs-on: ubuntu-latest
     if: (github.event.issue.user.id != github.event.comment.user.id) && !github.event.issue.pull_request && (github.event.issue.state == 'open')
     steps:
-      - name: Add require replay label
-        uses: actions-cool/issues-helper@v2
-        with:
-          actions: 'add-labels'
-          labels: 'comment/pending feedback'
-
       - name: Remove require handle label
         uses: actions-cool/issues-helper@v2
         with:
           actions: 'remove-labels'
           labels: 'comment/pending handle'
+
+      - name: Add require replay label
+        uses: actions-cool/issues-helper@v2
+        with:
+          actions: 'add-labels'
+          labels: 'comment/pending feedback'
